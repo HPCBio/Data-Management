@@ -1,6 +1,6 @@
-## Data Management and Access
+# Data Management and Access
 
-### Objectives
+## Objectives
 
 Students will be able to:
 
@@ -12,8 +12,7 @@ Students will be able to:
   data publicly available
 - make data citable via DOI
 
-
-### Topics
+## Topics
 
 A disclaimer: my background is nuclear engineering and high-performance
 computing. So I had a strong feeling that "I have no idea what I'm doing" when I
@@ -21,7 +20,7 @@ started working on this project. But fortunately, practices of good data
 management carry over significantly between fields.
 
 
-### Motivation for database and archival
+## Motivation for database and archival
 
 When you process data, it is a trivial truth that you want access to the
 following forms of your data:
@@ -62,7 +61,7 @@ allowing you to both recover from a previous mistake as well as revert to a
 specific time in the past (such as when you submitted a paper for review).
 
 
-### Practical data set management
+## Practical data set management
 
 What we'd like to see ideally is a world where datasets are open to interested
 scientists; have an auditable provenance for their collection, processing, and
@@ -89,7 +88,7 @@ Now that we have a numbered list, naturally I'll step through it in reverse
 order.
 
 
-#### Data formats
+### Data formats
 
 In 1914, Ernest Shackleton, one of the last great explorers, commissioned the
 Imperial Trans-Antarctic Expedition, a magnificent attempt to cross Antarctica
@@ -149,7 +148,7 @@ here, actually: you should put your data in a redundant accessible location such
 as a data-hosting service.
 
 
-##### Text *v.* binary
+#### Text *v.* binary
 
 Of course, the *physical* format is one thing—what about the software encoding?
 By which I mean, how your data are actually stored on the disk affects whether
@@ -182,7 +181,7 @@ average and standard deviation of each measurement and look at both the raw data
 again and then at the `diff`s of the files.
 
 
-##### Data *v.* process
+#### Data *v.* process
 
 The data set used a moment ago originally came from a master's
 thesis<sup>[[Horton2004](#Horton2004)]</sup> illustrating the use of machine
@@ -238,7 +237,7 @@ Now what should you do if part of your analysis process is manual—if it can't 
 scripted? Are there examples of this in bioinformatics?
 
 
-##### Case studies
+#### Case studies
 
 So let's take a look at a few case studies and critique what is right and what
 is wrong according to this paradigm.
@@ -273,7 +272,7 @@ is wrong according to this paradigm.
     (good example of data sets, but in DOC format)
 
 
-#### Version control (Git)
+### Version control (Git)
 
 Version control is an increasingly inappropriate name for what you could also
 just call controlled change tracking. Imagine doing all of your work in an
@@ -297,7 +296,7 @@ aside from the innumerable benefits of just knowing *which* version of a
 collaborator's R script you should be running on the data set!)
 
 
-##### Conceptual model
+#### Conceptual model
 
 We'll divide the world into three zones: a working area, a staging area, and a
 repository or archive. Each of these serves its own rôle and communicates data
@@ -312,10 +311,10 @@ kobold, wurm.
     IRRRLQLNPTQAFFLLVNQHSMVSVSTPIADIYEQEKDEDGFLYMVYASQETFGFIRENE
 
 
-##### Creating a repository
+#### Creating a repository
 
 
-##### Recording changes to files: add, commit, ...
+#### Recording changes to files: add, commit, ...
 
 Now let us add data to this file—let's say another observation, and we can argue
 about the appropriateness in bioinformatics of appending varied sequence data
@@ -336,21 +335,21 @@ this way later.
     ARYSAFYNLLHCLRRDSSKIDTYLKLLNCRIIYNNNC*
 
 
-##### Viewing changes: status, diff, ...
+#### Viewing changes: status, diff, ...
 
 
-##### Ignoring files
+#### Ignoring files
 
 
-##### Working on the web: clone, pull, push, ...
+#### Working on the web: clone, pull, push, ...
 
 
-##### Resolving conflicts
+#### Resolving conflicts
 
 
-#### Publishing data online (GitHub, Dryad, RDS)
+### Publishing data online (GitHub, Dryad, RDS)
 
-##### Creating a repository on GitHub
+#### Creating a repository on GitHub
 
 Time was when you wanted to host a new open-source project online, you went to
 [SourceForge](http://sourceforge.net/) or the now-defunct Google Code project.
@@ -370,13 +369,13 @@ to those who generate and analyze data and who need to document the data set or
 process itself.
 
 
-##### Collaborating with others on GitHub
+#### Collaborating with others on GitHub
 
 Collaboration generally proceeds along two lines: either the fork-join model or
 the sharing/branching model.
 
 
-##### GitHub Auxiliary Features
+#### GitHub Auxiliary Features
 
 There are a lot of auxiliary features as well on GitHub that make it attractive
 to anyone developing anything: [automatic project
@@ -406,7 +405,7 @@ to many platforms but underutilized).
     GitHub wiki feature.)
 
 
-##### Publishing data on Dryad
+#### Publishing data on Dryad
 
 For years, there was no good way to make code, documentation, and data available
 persistently. Although services such as the [Internet
@@ -447,7 +446,7 @@ can help you search for persistent solutions to data archival in those cases as
 well.
 
 
-##### Overview of Research Data Service
+#### Overview of Research Data Service
 
 The University of Illinois' [Research Data
 Service](http://researchdataservice.illinois.edu/) has a collection of best
@@ -457,7 +456,7 @@ like to introduce data curator Elizabeth Wickes of RDS. She's going to talk
 about their services and data management.
 
 
-##### Citability
+#### Citability
 
 Of course, if we're going to all of the trouble of preserving our data online,
 we want to make it as easy as possible for other researchers to cite the data
@@ -469,7 +468,7 @@ Data Service, you are also assigned a persistent DOI to use in citation or on a
 CV.
 
 
-#### Data usability
+### Data usability
 
 Thus far we've focused on format and access. I would be remiss in not reviewing
 best practices in rendering your data *usable* to other researchers. The
@@ -500,7 +499,7 @@ seen many of these before in our discussion, this provides a good recap.
     they can use your work.
 
 
-##### Common data types
+#### Common data types
 
 | Format Name | Description |
 |-------------|-------------|
@@ -521,7 +520,7 @@ Other formats are listed at
 -   Which of these are more appropriate in light of what we've discussed?  Why?
 
 
-### References
+## References
 
 -   <a id="Bioinformatics2015">Bioinformatics2015</a>:  [*Bioinformatics Activity Bank*](http://teachingbioinformatics.fandm.edu/).  2015.
 
