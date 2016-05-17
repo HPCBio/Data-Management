@@ -1,5 +1,7 @@
 # Data Organization
 
+## Introduction
+
 Project organization is one of the most important parts of a sequencing project, but is often overlooked in the excitement to get a first look at new data. While it's best to get yourself organized before you begin analysis,
 it's never too late to start.
 
@@ -88,7 +90,7 @@ $ history | tail -n7
 ```
 As you may remember from the shell lesson, the pipe ``|`` sends the output of history to the next program, in this case, tail. We have used the -n option to give the last 7 lines.
 
-3. Using your knowledge of the shell use the append redirect ``>>`` to create a file called **dc_workshop_log_XXXX_XX_XX.txt** (Use the four-digit year, two-digit month, and two digit day, e.g. dc_workshop_log_2015_07_30.txt)
+3. Using your knowledge of the shell use the append redirect ``>>`` to create a file called **dc_workshop_log_XXXX_XX_XX.txt** (Use the four-digit year, two-digit month, and two digit day, e.g. ``2015_07_30_dc_workshop_log.txt``)
 
 4. You may have noticed that your history may contain the ``history`` command itself. To remove this redundancy from our log, lets use the ``nano`` text editor to fix the file:
    ```bash
@@ -99,9 +101,6 @@ From the nano screen, you should be able to use your cursor to navigate, type, a
 5. Add a dateline and comment to the line where you have created the directory e.g. <br>
    ```
 # 2015_07_30
-```
-<br>
-   ```
 # Created sample directories for the Data Carpentry workshop
 ```
 
