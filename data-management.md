@@ -5,9 +5,11 @@
 Students will be able to:
 
 - articulate a definition and rationale for data management
-- understand and use common database formats and other data formats for bioinformatics and omics
+- understand and use common database formats and other data formats for
+  bioinformatics and omics
 - utilize Git to commit and manage data sets and changes thereto
-- utilize online repository services (such as GitHub, RDS, and Dryad) to make data publicly available
+- utilize online repository services (such as GitHub, RDS, and Dryad) to make
+  data publicly available
 - make data citable via DOI
 
 
@@ -21,7 +23,8 @@ management carry over significantly between fields.
 
 ### Motivation for database and archival
 
-When you process data, it is a trivial truth that you want access to the following forms of your data:
+When you process data, it is a trivial truth that you want access to the
+following forms of your data:
 
 1. the raw data, either as gathered from the initial instrumentation or
 simulation or immediately after filtering for "good" values, whatever that may
@@ -29,7 +32,7 @@ mean;
 2. the data in the process of analysis *or* the process of analysis itself; and
 3. the final results of the analysis (if nontrivial).
 
-Numbers one and three are fairly straightforward—you simply archive a copy of
+Numbers one and three are fairly straightforward — you simply archive a copy of
 the data fresh from the source and then deposit a copy of the final results.
 Number two can be a bit trickier. This is the stage where you often see data
 overwritten as one goes down one false start after another (which is fine and
