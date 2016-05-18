@@ -91,21 +91,20 @@ In this exercise we will setup a filesystem for the project we will be using in 
 
 ## Exercise
 
-### A. Create file system for a project
+### Create file system for a project
 
 Inspired by the guide below, we will start by create a directory that we can use for the rest of the workshop:
+
+---
 
 First, make sure that you are in your home directory:
 
 ```bash
 $ pwd
 /home/dcuser
-# Hopefully you got something like the above output
 ```
 
-**Tip:** Remember, when we give a command, rather than copying and pasting, just
-type it out. Also the '$' indicates we are at the command prompt, do not include
-that in your command.
+**Tip:** Remember, when we give a command, rather than copying and pasting, just type it out. Also the ``$`` indicates we are at the command prompt, do not include that in your command.
 
 **Tip** If you were not in your home directory, the easiest way to get there is
 to enter the command ``cd`` which always returns you to home.
@@ -210,8 +209,3 @@ From the nano screen, you should be able to use your cursor to navigate, type, a
 
 2. What is the difference between ``>`` and ``>>``
 
----
-
-##References
-
-[A Quick Guide to Organizing Computational Biology Projects](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)
