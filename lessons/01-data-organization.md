@@ -12,13 +12,41 @@ May 19, 2016
 
 ## Introduction
 
+* Project organization is one of the most important parts of any project
+* Best to think about organization prior to start, but never too late
+
 ^Project organization is one of the most important parts of a sequencing project, but is often overlooked in the excitement to get a first look at new data. While it's best to get yourself organized before you begin analysis, it's never too late to start.
 
 ---
 
-^You should approach your sequencing project in a very similar way to how you do a biological experiment, and ideally, begins with experimental design. We're going to assume that you've already designed a beautiful sequencing experiment to address your biological question, collected appropriate samples, and that you have enough statistical power. For all of those steps, collecting specimens, extracting DNA, prepping your samples, you've likely kept a lab notebook that details how and why you did each step, but documentation doesn't stop at the sequencer!
+## Introduction
+
+* Think about the project as a biological experiment
+	* How do you design an experiment?
+	* How many variations on analyses can you perform?
+
+^You should approach your project in a very similar way to how you do a biological experiment, and ideally, begins with experimental design. We're going to assume that you've already designed a beautiful sequencing experiment to address your biological question, collected appropriate samples, and that you have enough statistical power. For all of those steps, collecting specimens, extracting DNA, prepping your samples, you've likely kept a lab notebook that details how and why you did each step, but documentation doesn't stop at the sequencer!
 
 ---
+
+## Introduction
+
+* How do you track experimental data and analyses?
+	* ( I am hoping a few will say a lab notebook :smiley: )
+	* You *document* them, keeping as much information as possible about...
+		* Overall experimental design
+		* How data are generated (experimental conditions, treatments, replicates, processed batches, etc)
+		* How data are further processed (filtered, normalized, condensed, visualized, etc)
+
+---
+
+## Introduction
+		
+* You should think about this when performing computational analyses
+	* How do you organize your data? 
+		* Think about what kinds of data you start with
+		* What you will probably generate
+* What is the best way to name your data and your directories?
 
 ^Every computational analysis you do is going to spawn many files, and
 inevitability, you'll want to run some of those analysis again. Genomics
@@ -26,7 +54,19 @@ projects can quickly accumulate hundreds, maybe thousands of files across tens o
 
 ---
 
+Here's a representative layout[^1]:
+
+![inline](./img/directory-org.png)
+
 ^Luckily, recording your computational experiments is even easier than recording lab data. Copy/Paste will become your best friend, sensible file names will make your analysis traversable by you and your collaborators, and writing the methods section for your next paper will be a breeze. Let's look at the best practices for documenting your genomics project.
+
+[^1]: [A Quick Guide to Organizing Computational Biology Projects](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)
+
+---
+
+We have adopted a very similar layout within HPCBio projects (note we also add documentation with each analysis):
+
+![inline](./img/HPCBio-org.png)
 
 ---
 
@@ -36,9 +76,10 @@ Your future self will thank you. :smiley:
 
 ## Exercise
 
-In this exercise we will setup a filesystem for the project we will be using over the next few days. We will also introduce you to some helpful shell commands/programs/tools:
+In this exercise we will setup a filesystem for the project we will be using in the next session. We will also introduce you to some helpful shell commands/programs/tools:
 
 * ``mkdir`` - create directories
+* ``pwd`` - print the current (present) working directory
 * ``history`` - view bash history
 * ``tail`` - view end of file
 * ``|`` - UNIX pipe
@@ -102,53 +143,43 @@ dc_workshop/src:
 
 ---
 
-#### B. Document your activity on the project
+### B. Document your activity on the project
 
-The *history* command is a convenient way to document the all the commands you
-have used while analyzing and manipulating your project. Let's document the work
-we have done to create these folders.
+The *history* command is a convenient way to document the all the commands you have used while analyzing and manipulating your project. Let's document the work we have done to create these folders.
 
 ---
 
 1. View the commands that you have used so far during this session using ``history``:
 
-   ```bash
+```bash
 $ history
 ```
-The history likely contains many more commands that you have used just for these
-projects. Let's view the last several commands so that focus on just what we
-need for the project.
+
+The history likely contains many more commands that you have used just for these projects. Let's view the last several commands so that focus on just what we need for the project.
 
 ---
 
-2. View the last n lines of your history (where n = approximately the last few
-lines you think relevant - for our example we will use the last 7:
+2. View the last n lines of your history (where n = approximately the last few lines you think relevant - for our example we will use the last 7:
 
-   ```bash
+```bash
 $ history | tail -n7
 ```
-As you may remember from the shell lesson, the pipe ``|`` sends the output of
-history to the next program, in this case, tail. We have used the -n option to
-give the last 7 lines.
+
+As you may remember from the shell lesson, the pipe ``|`` sends the output of history to the next program, in this case, tail. We have used the -n option to give the last 7 lines.
 
 ---
 
-3. Using your knowledge of the shell use the append redirect ``>>`` to create a
-file called **dc_workshop_log_XXXX_XX_XX.txt** (Use the four-digit year,
-two-digit month, and two digit day, e.g. ``2015_07_30_dc_workshop_log.txt``)
+3. Using your knowledge of the shell use the append redirect ``>>`` to create a file called **``dc_workshop_log_XXXX_XX_XX.txt``** (Use the four-digit year, two-digit month, and two digit day, e.g. ``2015_07_30_dc_workshop_log.txt``)
 
 ---
 
-4. You may have noticed that your history may contain the ``history`` command
-itself. To remove this redundancy from our log, lets use the ``nano`` text
-editor to fix the file:
+4. You may have noticed that your history may contain the ``history`` command itself. To remove this redundancy from our log, lets use the ``nano`` text editor to fix the file:
 
 ```bash
 $ nano dc_workshop_log
 ```
 
-From the nano screen, you should be able to use your cursor to navigate, type,
-and delete any redundant lines.
+From the nano screen, you should be able to use your cursor to navigate, type, and delete any redundant lines.
 
 ---
 
@@ -161,24 +192,19 @@ and delete any redundant lines.
 
 ---
 
-6. Next, remove any lines of the history that are not relevant. Just navigate to
-those lines and use your delete key.
+6. Next, remove any lines of the history that are not relevant. Just navigate to those lines and use your delete key.
 
 ---
 
-7. Close nano by hitting 'Control' and the 'X' key at the same time; notice in
-nano this is abbreviated '\^X'; nano will ask if you want to save; hit 'Y' for
-yes. When prompted for the 'File Name to Write' we can hit 'Enter' to keep the
-same name and save.
+7. Close nano by hitting 'Control' and the 'X' key at the same time; notice in nano this is abbreviated '\^X'; nano will ask if you want to save; hit 'Y' for yes. When prompted for the 'File Name to Write' we can hit 'Enter' to keep the same name and save.
 
 ---
 
-8. Now that you have created the file, move the file to 'dc_workshop/docs' using
-the ``mv`` command.
+8. Now that you have created the file, move the file to 'dc_workshop/docs' using the ``mv`` command.
 
 ---
 
-**Questions**:
+## Questions:
 
 1. What is the default number of lines that tail displays?
 
@@ -186,5 +212,6 @@ the ``mv`` command.
 
 ---
 
-###References
+##References
+
 [A Quick Guide to Organizing Computational Biology Projects](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)
