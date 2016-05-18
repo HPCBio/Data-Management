@@ -1,5 +1,11 @@
 # Data Management and Access
 
+**Chris Fields**
+Data Carpentry Workshop
+May 21, 2016
+
+---
+
 ## Objectives
 
 Students will be able to:
@@ -12,6 +18,25 @@ Students will be able to:
   data publicly available
 - make data citable via DOI
 
+---
+
+```ruby
+def establish_connection(spec = nil)
+  spec     ||= DEFAULT_ENV.call.to_sym
+  resolver =   ConnectionAdapters::ConnectionSpecification::Resolver.new configurations
+  spec     =   resolver.spec(spec)
+
+  unless respond_to?(spec.adapter_method)
+    raise AdapterNotFound, "database configuration specifies nonexistent #{spec.config[:adapter]} adapter"
+  end
+
+  remove_connection
+  connection_handler.establish_connection self, spec
+end
+```
+
+---
+
 ## Topics
 
 A disclaimer: my background is nuclear engineering and high-performance
@@ -19,6 +44,7 @@ computing. So I had a strong feeling that "I have no idea what I'm doing" when I
 started working on this project. But fortunately, practices of good data
 management carry over significantly between fields.
 
+---
 
 ## Motivation for database and archival
 
@@ -42,10 +68,9 @@ data process is more elusive.
 
 We'll mention two levels of granularity in data processing:
 
-1. process-level data changes (which corresponds to recovering your history in
-R);
+1. process-level data changes (which corresponds to recovering your history in R);
 2. system-level data changes (which corresponds to annotating and storing
-specific versions of your files).
+   specific versions of your files).
 
 The first is readily accessible to you. Not all data operations are reversible,
 but you ought to be starting from a point where you can repeat the recent set of
@@ -60,6 +85,7 @@ has an auditable provenance: that is, changes are as reversible as possible,
 allowing you to both recover from a previous mistake as well as revert to a
 specific time in the past (such as when you submitted a paper for review).
 
+---
 
 ## Practical data set management
 
@@ -87,6 +113,7 @@ rare.)
 Now that we have a numbered list, naturally I'll step through it in reverse
 order.
 
+---
 
 ### Data formats
 
@@ -147,13 +174,14 @@ and is replaced and where it is accessible to people. That's the major point
 here, actually: you should put your data in a redundant accessible location such
 as a data-hosting service.
 
+---
 
 #### Text *v.* binary
 
 Of course, the *physical* format is one thing—what about the software encoding?
 By which I mean, how your data are actually stored on the disk affects whether
 or not a file is suitable for long-term usability. You are aware that most
-programs offer different ways of saving data—a trivial example is Word, which as
+programs offer different ways of saving data.  A trivial example is Word, which as
 of Word for Mac 2011 offered 15 different formats for saving a simple document.
 Why are all of these different? Well, for starters, some are very simple
 text-based formats, which just store the words and maybe some minimal
@@ -169,17 +197,21 @@ WordPerfect and WordStar lie not outside the memory of some in this audience.
 We have a file called `microarray.csv`
 here<sup>[[Horton2004](http://www.cybertory.org/downloads/bae/)]</sup>. This
 file contains experimental microarray measurements on a number of human viruses,
-described in the author's commentary thus: <blockquote> This microarray contains
-approximately 12,000 spots, each containing a small sequence of a conserved
-region from a known virus. By hybridizing a sample of an unknown virus to this
-array of segments from known viruses, we hope to be able to identify which known
-virus the sample most closely resembles. </blockquote>
+described in the author's commentary thus:
+
+<blockquote>
+This microarray contains approximately 12,000 spots, each containing a small
+sequence of a conserved region from a known virus. By hybridizing a sample of an
+unknown virus to this array of segments from known viruses, we hope to be able
+to identify which known virus the sample most closely resembles.
+</blockquote>
 
 First, we're going to open the file and examine its contents. Next, we'll save a
 copy in XLS format and look at the raw data. Then we'll add lines indicating the
 average and standard deviation of each measurement and look at both the raw data
 again and then at the `diff`s of the files.
 
+---
 
 #### Data *v.* process
 
@@ -228,14 +260,15 @@ things orthogonal.
 
 What constitutes data and what constitutes process? Things can get a little
 fuzzy when you start to include things like calculating the mean or standard
-deviation—which are they?
+deviation — which are they?
 
 -   Keep data and analysis in separate folders.
 -   Keep raw data and analysis results in separate folders.
 
-Now what should you do if part of your analysis process is manual—if it can't be
+Now what should you do if part of your analysis process is manual — if it can't be
 scripted? Are there examples of this in bioinformatics?
 
+---
 
 #### Case studies
 
@@ -248,8 +281,7 @@ is wrong according to this paradigm.
     [archive.org](https://web.archive.org/web/19970701232759/http://www.bvis.uic.edu/museum/science/Science.html)
     version that works; the main link is a Gopher protocol, which predates the
     Web and is not supported for access by any mainstream browser anymore;
-    finally I found [a modern
-    site](http://www.fieldmuseum.org/nestedness-temperature-calculator-program)
+    finally I found [a modern site](http://www.fieldmuseum.org/nestedness-temperature-calculator-program)
     but all of the links are still dead. This is a worst-case scenario.)
 
 -   [Baden2014](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.1001972)
@@ -271,6 +303,7 @@ is wrong according to this paradigm.
 -   [Wang2003](http://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0000002)
     (good example of data sets, but in DOC format)
 
+---
 
 ### Version control (Git)
 
@@ -295,6 +328,7 @@ ongoing codelike processes* that we can track the same way as code. (And that's
 aside from the innumerable benefits of just knowing *which* version of a
 collaborator's R script you should be running on the data set!)
 
+---
 
 #### Conceptual model
 
@@ -310,9 +344,11 @@ kobold, wurm.
     MKMRFFSSPCGKAAVDPADRCKEVQQIRDQHPSKIPVIIERYKGEKQLPVLDKTKFLVPDHVNMSELVKI
     IRRRLQLNPTQAFFLLVNQHSMVSVSTPIADIYEQEKDEDGFLYMVYASQETFGFIRENE
 
+---
 
 #### Creating a repository
 
+---
 
 #### Recording changes to files: add, commit, ...
 
@@ -337,17 +373,23 @@ this way later.
 
 #### Viewing changes: status, diff, ...
 
+---
 
 #### Ignoring files
 
+---
 
 #### Working on the web: clone, pull, push, ...
 
+---
 
 #### Resolving conflicts
 
+---
 
 ### Publishing data online (GitHub, Dryad, RDS)
+
+---
 
 #### Creating a repository on GitHub
 
@@ -368,12 +410,14 @@ software development with version control and a repository system readily extend
 to those who generate and analyze data and who need to document the data set or
 process itself.
 
+---
 
 #### Collaborating with others on GitHub
 
 Collaboration generally proceeds along two lines: either the fork-join model or
 the sharing/branching model.
 
+---
 
 #### GitHub Auxiliary Features
 
@@ -404,6 +448,7 @@ to many platforms but underutilized).
     textbook](https://github.com/angrave/SystemProgramming/wiki) using the
     GitHub wiki feature.)
 
+---
 
 #### Publishing data on Dryad
 
@@ -445,16 +490,17 @@ well with certain repositories. The service [re3data](http://www.re3data.org/)
 can help you search for persistent solutions to data archival in those cases as
 well.
 
+---
 
 #### Overview of Research Data Service
 
-The University of Illinois' [Research Data
-Service](http://researchdataservice.illinois.edu/) has a collection of best
+The University of Illinois' [Research Data Service](http://researchdataservice.illinois.edu/) has a collection of best
 practices available on their web site, suggesting ways to organize your data and
 links to major funding agency requirements for data management plans. I would
 like to introduce data curator Elizabeth Wickes of RDS. She's going to talk
 about their services and data management.
 
+---
 
 #### Citability
 
@@ -467,6 +513,7 @@ one. With data sets, once you submit to a repository like Dryad or the Research
 Data Service, you are also assigned a persistent DOI to use in citation or on a
 CV.
 
+---
 
 ### Data usability
 
@@ -475,15 +522,13 @@ best practices in rendering your data *usable* to other researchers. The
 principles I'll outline now come from [[White2013](#White2013)]. While we've
 seen many of these before in our discussion, this provides a good recap.
 
-1.  Share your data.
-2.  Provide metadata.
-3.  Provide an unprocessed form of the data.
-4.  Use standard data formats.
-    
-    ![](./img/xkcd-standards.png)
-    
+![](./img/xkcd-standards.png)
+
+1. Share your data.
+2. Provide metadata.
+3. Provide an unprocessed form of the data.
+4. Use standard data formats.
     1.  Use standard file formats.
-        
         In HPC, this often means "don't make up a new file format when an old
         one will do", but it also means avoid proprietary formats for archival
         purposes.
@@ -498,6 +543,7 @@ seen many of these before in our discussion, this provides a good recap.
     1. We haven't talked much about licenses, which of course tell others *how*
     they can use your work.
 
+---
 
 #### Common data types
 
@@ -519,6 +565,7 @@ Other formats are listed at
 
 -   Which of these are more appropriate in light of what we've discussed?  Why?
 
+---
 
 ## References
 
