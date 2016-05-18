@@ -32,6 +32,8 @@ for documenting your genomics project.
 
 Your future self will thank you.
 
+---
+
 ## Exercise
 
 In this exercise we will setup a filesystem for the project we will be using
@@ -44,6 +46,8 @@ commands/programs/tools:
 * ``|``
 * ``nano``
 * ``>>``
+
+---
 
 #### A. Create a file system for a project
 
@@ -63,6 +67,8 @@ that in your command.
 
 **Tip** If you were not in your home directory, the easiest way to get there is
 to enter the command ``cd`` which always returns you to home.
+
+---
 
 Next, try making the following directories using the ``mkdir`` command
 
@@ -93,11 +99,15 @@ dc_workshop/results:
 dc_workshop/src:
 ```
 
+---
+
 #### B. Document your activity on the project
 
 The *history* command is a convenient way to document the all the commands you
 have used while analyzing and manipulating your project. Let's document the work
 we have done to create these folders.
+
+---
 
 1. View the commands that you have used so far during this session using ``history``:
 
@@ -107,6 +117,8 @@ $ history
 The history likely contains many more commands that you have used just for these
 projects. Let's view the last several commands so that focus on just what we
 need for the project.
+
+---
 
 2. View the last n lines of your history (where n = approximately the last few
 lines you think relevant - for our example we will use the last 7:
@@ -118,40 +130,60 @@ As you may remember from the shell lesson, the pipe ``|`` sends the output of
 history to the next program, in this case, tail. We have used the -n option to
 give the last 7 lines.
 
+---
+
 3. Using your knowledge of the shell use the append redirect ``>>`` to create a
 file called **dc_workshop_log_XXXX_XX_XX.txt** (Use the four-digit year,
 two-digit month, and two digit day, e.g. ``2015_07_30_dc_workshop_log.txt``)
 
+---
+
 4. You may have noticed that your history may contain the ``history`` command
 itself. To remove this redundancy from our log, lets use the ``nano`` text
 editor to fix the file:
-   ```bash
+
+```bash
 $ nano dc_workshop_log
 ```
+
 From the nano screen, you should be able to use your cursor to navigate, type,
 and delete any redundant lines.
 
-5. Add a dateline and comment to the line where you have created the directory e.g. <br>
-   ```
+---
+
+5. Add a dateline and comment to the line where you have created the directory e.g.
+
+```bash
 # 2015_07_30
 # Created sample directories for the Data Carpentry workshop
 ```
 
+---
+
 6. Next, remove any lines of the history that are not relevant. Just navigate to
 those lines and use your delete key.
+
+---
 
 7. Close nano by hitting 'Control' and the 'X' key at the same time; notice in
 nano this is abbreviated '\^X'; nano will ask if you want to save; hit 'Y' for
 yes. When prompted for the 'File Name to Write' we can hit 'Enter' to keep the
 same name and save.
 
+---
+
 8. Now that you have created the file, move the file to 'dc_workshop/docs' using
 the ``mv`` command.
 
-**Questions**: <br>
-1. What is the default number of lines that tail displays?<br>
+---
+
+**Questions**:
+
+1. What is the default number of lines that tail displays?
 
 2. What is the difference between ``>`` and ``>>``
+
+---
 
 ###References
 [A Quick Guide to Organizing Computational Biology Projects](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)

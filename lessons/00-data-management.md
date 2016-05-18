@@ -1,3 +1,7 @@
+build-lists: true
+footer: HPCBio, 2016
+slidenumbers: true
+
 # Data Management and Access
 
 **Chris Fields**
