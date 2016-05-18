@@ -6,7 +6,7 @@ slidenumbers: true
 
 **Chris Fields**
 Data Carpentry Workshop
-May 21, 2016
+May 19, 2016
 
 ---
 
