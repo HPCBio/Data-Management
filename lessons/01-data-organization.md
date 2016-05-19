@@ -1,4 +1,4 @@
-build-lists: true
+build-lists: false
 footer: HPCBio, 2016
 slidenumbers: true
 
@@ -10,10 +10,17 @@ May 19, 2016
 
 ---
 
+## Objectives
+
+- Help you organize your data (including raw data, documentation, source code, and such)
+- Understand why it is important to separate data from analysis (process)
+
+---
+
 ## Introduction
 
 * Project organization is one of the most important parts of any project
-* Best to think about organization prior to start, but never too late
+* Think about organization prior to start, but never too late to start!
 
 ^Project organization is one of the most important parts of a sequencing project, but is often overlooked in the excitement to get a first look at new data. While it's best to get yourself organized before you begin analysis, it's never too late to start.
 
@@ -33,10 +40,17 @@ May 19, 2016
 
 * How do you track experimental data and analyses?
 	* ( I am hoping a few will say a lab notebook :smiley: )
-	* You *document* them, keeping as much information as possible about...
-		* Overall experimental design
-		* How data are generated (experimental conditions, treatments, replicates, processed batches, etc)
-		* How data are further processed (filtered, normalized, condensed, visualized, etc)
+
+---
+
+## Introduction
+
+* You *document* them, keeping as much information as possible about...
+	* Overall experimental design
+	* How data are generated (experimental conditions, treatments, replicates, processed batches, etc)
+	* How data are further processed
+	  * filtered, normalized, condensed, visualized, etc.
+
 
 ---
 
@@ -54,7 +68,15 @@ projects can quickly accumulate hundreds, maybe thousands of files across tens o
 
 ---
 
-Here's a representative layout[^1]:
+## Noble paper
+
+![inline](./img/noble.png)
+
+---
+
+## Noble paper
+
+A representative layout[^1]:
 
 ![inline](./img/directory-org.png)
 
@@ -70,18 +92,25 @@ We have adopted a very similar layout within HPCBio projects (note we also add d
 
 ---
 
+Though this takes some getting used to, I have found it does help significantly (and you can evolve this scheme to best fit within your workflow).
+
 Your future self will thank you. :smiley:
 
 ---
 
 ## Exercise
 
-In this exercise we will setup a filesystem for the project we will be using in the next session. We will also introduce you to some helpful shell commands/programs/tools:
+In today's exercises we will setup a filesystem for the project we will be using in the next session.  You will use these shell commands/programs/tools:
 
 * ``mkdir`` - create directories
 * ``pwd`` - print the current (present) working directory
 * ``history`` - view bash history
 * ``tail`` - view end of file
+
+---
+
+## Exercise
+
 * ``|`` - UNIX pipe
 * ``nano`` - editor
 * ``>>`` - append to file
@@ -93,7 +122,7 @@ In this exercise we will setup a filesystem for the project we will be using in 
 
 ### Create file system for a project
 
-Inspired by the guide below, we will start by create a directory that we can use for the rest of the workshop:
+Inspired by the Noble guide, we will start by create a directory that we can use for the rest of the workshop:
 
 ---
 
@@ -101,13 +130,12 @@ First, make sure that you are in your home directory:
 
 ```bash
 $ pwd
-/home/dcuser
+/home/a-m/<USER_NAME>
 ```
 
 **Tip:** Remember, when we give a command, rather than copying and pasting, just type it out. Also the ``$`` indicates we are at the command prompt, do not include that in your command.
 
-**Tip** If you were not in your home directory, the easiest way to get there is
-to enter the command ``cd`` which always returns you to home.
+**Tip** If you were not in your home directory, the easiest way to get there is to enter the command ``cd`` which always returns you to home.
 
 ---
 
@@ -119,15 +147,20 @@ Next, try making the following directories using the ``mkdir`` command
 * ``dc_workshop/results``
 * ``dc_workshop/src``
 
+---
+
 Verify that you have created the directories;
 
 ```bash
 $ ls -R dc_workshop
 ```
 
-if you have created these directories, you should get the following output from that command:
+---
+
+If you have created these directories, you should get the following output from that command:
 
 ```bash
+$ ls -R dc_workshop
 dc_workshop/:
 data  docs  results  src
 
@@ -142,13 +175,13 @@ dc_workshop/src:
 
 ---
 
-### B. Document your activity on the project
+### Document your activity on the project
 
 The *history* command is a convenient way to document the all the commands you have used while analyzing and manipulating your project. Let's document the work we have done to create these folders.
 
 ---
 
-1. View the commands that you have used so far during this session using ``history``:
+A. View the commands that you have used so far during this session using ``history``:
 
 ```bash
 $ history
@@ -158,7 +191,7 @@ The history likely contains many more commands that you have used just for these
 
 ---
 
-2. View the last n lines of your history (where n = approximately the last few lines you think relevant - for our example we will use the last 7:
+B. View the last n lines of your history (where n = approximately the last few lines you think relevant - for our example we will use the last 7:
 
 ```bash
 $ history | tail -n7
@@ -168,11 +201,11 @@ As you may remember from the shell lesson, the pipe ``|`` sends the output of hi
 
 ---
 
-3. Using your knowledge of the shell use the append redirect ``>>`` to create a file called **``dc_workshop_log_XXXX_XX_XX.txt``** (Use the four-digit year, two-digit month, and two digit day, e.g. ``2015_07_30_dc_workshop_log.txt``)
+C. Using your knowledge of the shell use the append redirect ``>>`` to create a file called ``2016-05-19_dc_workshop_log.txt`` (Use the four-digit year, two-digit month, and two digit day, e.g. ``2016-05-19_dc_workshop_log.txt``)
 
 ---
 
-4. You may have noticed that your history may contain the ``history`` command itself. To remove this redundancy from our log, lets use the ``nano`` text editor to fix the file:
+D. You may have noticed that your history may contain the ``history`` command itself. To remove this redundancy from our log, lets use the ``nano`` text editor to fix the file:
 
 ```bash
 $ nano dc_workshop_log
@@ -182,24 +215,24 @@ From the nano screen, you should be able to use your cursor to navigate, type, a
 
 ---
 
-5. Add a dateline and comment to the line where you have created the directory e.g.
+E. Add a dateline and comment to the line where you have created the directory e.g.
 
 ```bash
-# 2015_07_30
+# 2016_05_19
 # Created sample directories for the Data Carpentry workshop
 ```
 
 ---
 
-6. Next, remove any lines of the history that are not relevant. Just navigate to those lines and use your delete key.
+F. Next, remove any lines of the history that are not relevant. Just navigate to those lines and use your delete key.
 
 ---
 
-7. Close nano by hitting 'Control' and the 'X' key at the same time; notice in nano this is abbreviated '\^X'; nano will ask if you want to save; hit 'Y' for yes. When prompted for the 'File Name to Write' we can hit 'Enter' to keep the same name and save.
+G. Close nano by hitting `Control` and the `X` key at the same time; notice in nano this is abbreviated `^X`; nano will ask if you want to save; hit `Y` for yes. When prompted for the 'File Name to Write' we can hit 'Enter' to keep the same name and save.
 
 ---
 
-8. Now that you have created the file, move the file to 'dc_workshop/docs' using the ``mv`` command.
+H. Now that you have created the file, move the file to `dc_workshop/docs` using the ``mv`` command.
 
 ---
 
@@ -209,3 +242,4 @@ From the nano screen, you should be able to use your cursor to navigate, type, a
 
 2. What is the difference between ``>`` and ``>>``
 
+3. Why do we split `data` and `results` into separate folders?

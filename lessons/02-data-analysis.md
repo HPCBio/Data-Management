@@ -46,16 +46,22 @@ Next step is to actually grab some data and run a few analyses
 
 ---
 
-## Example: RNA-Seq
+## Transferring data
 
 To run analyses on the cluster you likely need to move data from one location to another
 
 * Move your sequencing data from the Biotechnology Center to the Biocluster
 * Move your processed data from the Biocluster to your desktop/laptop
-   * Globus is a direct route
-   * Use an SFTP client
-        * Filezilla, Cyberduck, WinSCP…
-   * Moba XTerm has basic functionality built in for this; we will be using this
+
+---
+
+## Transferring data
+
+* Globus
+* Command-line tools (`rsync`, `scp`, etc)
+* Use an SFTP client
+    * Filezilla, Cyberduck, WinSCP…
+* **Moba XTerm** has basic functionality built in for this; we will be using this
 
 ---
 
@@ -73,6 +79,7 @@ To run analyses on the cluster you likely need to move data from one location to
 * Two yeast strains: wild type & mutant 
 * Two treatments: drug & control
 * 3 replicates each
+* **We will use a small subset of these**
 
 ---
 
@@ -95,7 +102,7 @@ To run analyses on the cluster you likely need to move data from one location to
 ## Exercise: Uncompressing data
 
 * Copy `/home/classroom/hpcbio/sp15-rnaseq/yeast_data.tar.gz` to that `raw-data` directory
-* `cd` into the ``raw-data` directory
+* `cd` into the `raw-data` directory
 * Un-tar yeast data using: `tar –xvf yeast_data.tar.gz`
 
 ---
@@ -106,6 +113,18 @@ To run analyses on the cluster you likely need to move data from one location to
   * `yeast_1_50K.fastq.gz`
   * `yeast_1_50K.fastq.gz`
 * Any guesses about the compression program used to compressed these, based on the names?
+
+---
+
+## Exercise: View a `gzip`-compressed text file
+
+* Run the following:
+
+```bash
+$ zcat yeast_1_50K.fastq.gz | head -n 16
+```
+
+What format is this again?
 
 ---
 
@@ -139,10 +158,10 @@ To run analyses on the cluster you likely need to move data from one location to
 ## FASTQC
 
 * What do I do when FastQC calls my data poor?
-  * Poor quality at the ends can be remedied 
-    * “quality trimmers” like ``trimmomatic``, ``fastx-toolkit``, etc.
+  * Poor quality at the ends can be remedied
+     * “quality trimmers” like ``trimmomatic``, ``fastx-toolkit``, etc.
   * Left-over adapter sequences in the reads can be removed
-    * “adapter trimmers” like ``trimmomatic``, ``cutadapt``. 
+     * “adapter trimmers” like ``trimmomatic``, ``cutadapt``. 
 
 ---
 
@@ -154,14 +173,14 @@ To run analyses on the cluster you likely need to move data from one location to
 
 ## FASTQC
 
-* We need to amend these issues so we get the best possible alignment
+* We need to fix these issues so we get the best possible alignment
 * Once the trimmers have been used, it is best to rerun the data through FastQC to check the resulting data.
 
 ---
 
 ## Exercise: Run FASTQC
 
-Make sure you are running an interactive job!  
+Make sure you are running an interactive job!  If not:
 
 ```bash
 $ qsub -I -q classroom
@@ -179,13 +198,31 @@ Change into your `results` directory.  (Why here?)
 cd dc_workshop/results
 ```
 
-Make a new directory based on what you learned from the first session (**Hint** : it should be something like `2016-05-19-FASTQC-raw-data`).  `cd` into that folder.
+Make a new directory based on what you learned from the first session (**Hint** : it should be something like `2016-05-19-FASTQC_raw_data`).  `cd` into that folder.
 
 ---
 
-## Symbolic links
+## File links
 
-Our data is in `raw-data`.  We don't want to copy the data if possible.  You can run analyses directly on your raw data usng the full or relative paths, but it sometimes is easier to create shortcuts.  This is accomplished using `ln`.  You will almost always want to create a symbolic link, as it can be removed without harming the original file.
+* Our data is in `raw-data`
+* We don't want to copy the data if possible (keep in mind file sizes can be very large)  
+* You can run analyses directly on your raw data usng the full or relative paths, but it sometimes is easier to create shortcuts.  
+* This is accomplished using `ln`.  
+
+---
+
+## File links
+
+* `ln` can create **hard links** and **symbolic links**
+* **Hard links** - only within same file system, point to same *inode*
+  * *inode* - data structure containing information about a file
+* **Soft links** - literally a pointer to a file or directory.  Can span file systems.
+
+---
+
+## Links
+
+Let's use a symbolic link.
 
 ```bash
 $ ln -s ../../data/raw-data/*.fastq.gz .
@@ -197,19 +234,36 @@ lrwxrwxrwx 1 cjfields cjfields 40 May 18 14:28 yeast_1_50K.fastq.gz -> ../../dat
 
 ---
 
+## Run FASTQC
+
+**Note:** we're using the symbolic link here
+
 ```bash
-$ module load fastqc/0.11.4$ cd ~/fastqc-runs$ fastqc -o ./  ../raw-data/yeast_1_50K.fastq
+$ module load fastqc/0.11.4$ fastqc -o ./  yeast_1_50K.fastq
 ```
+
+What files appear?
+
+---
+
+## Exercise
+
+* Run FASTQC on the second sample
 
 --- 
 
 ## Transferring FASTQC results
 
-1. Create a new folder on the Desktop called rnaseq-workshop
-2. Open Filezilla
-3. Go to the Site Manager
+* Note on the left side panel of your client there is a file browser.  These are the files on the remote server
+* You can move into your `dc_workshop` folder to where you ran FASTQC and retrieve your results.
+* Click 'Download' or drag the `HTML` files to the desktop
+* Open the `HTML` files
 
 ---
+
+## Transferring FASTQC results (Filezilla)
+
+![right](./img/filezilla2.png)
 
 * Create a new folder on the Desktop called rnaseq-workshop
 * Open Filezilla
@@ -218,6 +272,10 @@ $ module load fastqc/0.11.4$ cd ~/fastqc-runs$ fastqc -o ./  ../raw-data/yeast
 * Log in to biocluster
 
 ---
+
+## Transferring FASTQC results (Filezilla)
+
+![right](./img/filezilla2.png)
 
 * In the “Host:” field type biocluster.igb.uiuc.edu
   * Leave “Port:” empty
@@ -229,19 +287,23 @@ $ module load fastqc/0.11.4$ cd ~/fastqc-runs$ fastqc -o ./  ../raw-data/yeast
 
 ---
 
+## Transferring FASTQC results (Filezilla)
+
 * Navigate to the fastqc-runs directory on the right panel
 * Navigate to rnaseq-workshop on the left panel
-* Transfer (by dragging) yeast_1_50K_fastqc.html to your computer
+* Transfer (by dragging) `yeast_1_50K_fastqc.html` to your computer
 
 ---
+
+## Transferring FASTQC results (Filezilla)
 
 Go to the rnaseq-workshop folder on your desktop
-Open the .html file by double clicking on it
+Open the `.html` file by double clicking on it
 
 ---
 
-* Run FastQC on the remaining file (``yeast_12_50K.fastq``)
-* Transfer the resulting html file to your computer
+## Exercise
+
 * How does the overall quality compare between the 2 yeast samples?
 
 ---
@@ -254,46 +316,86 @@ Open the .html file by double clicking on it
   * Adapter sequences
   * Low quality bases
 * How?
-  * Trimmomatic  (can handle paired-end reads)
+  * **Trimmomatic** (can handle paired-end reads)
   * FASTX-toolkit (includes many other handy tools as well)
 
 ---
 
-* Make a new directory in your home directory called trimming/
-*  Look at the contents of /home/apps/trimmomatic/trimmomatic-0.33/adapters/
-*  Which one should we copy?
-*  Copy over the correct one to trimming/ directory & name it myAdapters.fa
-*  Look at contents of myAdapters.fa
+## Trimming data
+
+* Make a new directory for trimming in `results`
+* Look at the contents of `/home/apps/trimmomatic/trimmomatic-0.33/adapters/`
+	* Which one should we copy?
+	* Copy over the correct one to your new work directory & name it `myAdapters.fa`
+	* Look at contents of `myAdapters.fa`
 
 ---
 
+## Trimming data
+
+Copy the starter script over.
+
 ```bash
-$ cp /home/classroom/hpcbio/sp15-rnaseq/$ script_templates/trim_yeast_1_50k-TEMPLATE.sh ~/dc_workshop/src/
+$ cp /home/classroom/hpcbio/sp15-rnaseq/script_templates/trim_yeast_1_50k-TEMPLATE.sh ~/dc_workshop/src/
 $ ls ~/dc_workshop/src/
 ```
 
 ---
 
-```bash
-#!/bin/bash#PBS -l nodes=1:ppn=2, mem=2gb#PBS -q classroom#PBS -j oe#PBS –N yeast.trim#PBS -M foo@bar.com#PBS –m abemodule load trimmomatic/0.33#Normally you would use full paths in this commandcd $PBS_O_WORKDIR java -jar /home/apps/trimmomatic/trimmomatic-0.33/trimmomatic-0.33.jar SE \-threads 2 \
--phred33 \
--trimlog yeast_1_50K.trimlog.txt \~/raw-data/yeast_1_50K.fastq yeast_1_50K.trimmed.fastq \ILLUMINACLIP:myAdapters.fa:2:30:10 \
-TRAILING:28 \
-LEADING:28 \
-MINLEN:30
+## Trimming data
 
+```bash
+#!/bin/bash#PBS -l nodes=1:ppn=2, mem=2gb#PBS -q classroom#PBS -j oe#PBS –N yeast.trim#PBS -M foo@bar.com#PBS –m abemodule load trimmomatic/0.33
+
+cd ~/trimming/
+
+java -jar /home/apps/trimmomatic/trimmomatic-0.33/trimmomatic-0.33.jar SE \
+-threads 2 -phred33 -trimlog yeast_1_50K.trimlog.txt yeast_1_50K.fastq \
+ yeast_1_50K.trimmed.fastq ILLUMINACLIP:myAdapters.fa:2:30:10 LEADING:28 \
+TRAILING:28 MINLEN:30
 ```
 
 ---
 
+## Exercise
+
+* Link in the raw sequence file to trim
 * Change the email address to yours
+* Modify the script to
+   * Change to the work directory (note it's switching to the wrong location)
+   * Point to the symlink'd file
+   * Modify anything else (note the names of files)
 * Add an extra command at the bottom that will run FASTQC on the resulting trimmed file
 
 ---
 
+## Submit the job
+
 ```
-$ exit   # Get on the head node!$ cd <WORKDIR>$ qsub trim_yeast_1_50k-TEMPLATE.sh
+$ exit   # Get on the head node!$ qsub trim_yeast_1_50k-TEMPLATE.sh
 ```
+
+---
+
+## So your script failed...
+
+* How do you diagnose what went wrong?
+* Note that some errors that popped up were module-related (this can sometimes happen).
+* We get lucky, as the FASTQC run still works
+
+---
+
+## Next file!
+
+* Copy the script so you can modify it
+* Link in the second raw sequence file
+* Changed the modified script to run the second file
+
+---
+
+## Grab the results
+
+Compare the original raw results to the new ones.
 
 ---
 
@@ -301,6 +403,11 @@ $ exit   # Get on the head node!$ cd <WORKDIR>$ qsub trim_yeast_1_50k-TEMPLATE
 
 * You could edit & run this script 50 times
   * This can be done with a loop within ``bash`` 
+
+---
+
+## Job arrays
+
 * OR you could use a job array
   *  ``#PBS -t 1-50`` <- run this script 50 times
   *  ``#PBS -t 1-50%10`` <- run this script 50 times but only run 10 jobs at a time
@@ -311,7 +418,7 @@ $ exit   # Get on the head node!$ cd <WORKDIR>$ qsub trim_yeast_1_50k-TEMPLATE
 ---
 
 ```bash
-#!/bin/bash#PBS -l nodes=1:ppn=2, mem=2gb#PBS -q classroom#PBS -j oe#PBS –N yeast.trim#PBS -M emailaddress#PBS –m abe#PBS -t 1-50%10module load trimmomatic/0.33cd ~/trimming/line=$(sed -n -e "$PBS_ARRAYID p" yeast_filenames.txt)java -jar /home/apps/trimmomatic/trimmomatic-0.33/trimmomatic-0.33.jar SE \-threads 2 \
+#!/bin/bash#PBS -l nodes=1:ppn=2,mem=2gb#PBS -q classroom#PBS -j oe#PBS –N yeast.trim#PBS -M emailaddress#PBS –m abe#PBS -t 1-50%10module load trimmomatic/0.33cd ~/trimming/line=$(sed -n -e "$PBS_ARRAYID p" yeast_filenames.txt)java -jar /home/apps/trimmomatic/trimmomatic-0.33/trimmomatic-0.33.jar SE \-threads 2 \
 -phred33 \
 -trimlog ${line}.trimlog.txt \../raw-data/${line} ${line}.trimmed.fastq.gz \ILLUMINACLIP:adapter.fa:2:30:10 \
 TRAILING:28 \
