@@ -181,7 +181,7 @@ The *history* command is a convenient way to document the all the commands you h
 
 ---
 
-A. View the commands that you have used so far during this session using ``history``:
+**A.** View the commands that you have used so far during this session using ``history``:
 
 ```bash
 $ history
@@ -191,7 +191,7 @@ The history likely contains many more commands that you have used just for these
 
 ---
 
-B. View the last n lines of your history (where n = approximately the last few lines you think relevant - for our example we will use the last 7:
+**B.** View the last n lines of your history (where n = approximately the last few lines you think relevant - for our example we will use the last 7:
 
 ```bash
 $ history | tail -n7
@@ -201,11 +201,11 @@ As you may remember from the shell lesson, the pipe ``|`` sends the output of hi
 
 ---
 
-C. Using your knowledge of the shell use the append redirect ``>>`` to create a file called ``2016-05-19_dc_workshop_log.txt`` (Use the four-digit year, two-digit month, and two digit day, e.g. ``2016-05-19_dc_workshop_log.txt``)
+**C.** Using your knowledge of the shell use the append redirect ``>>`` to create a file called ``2016-05-19_dc_workshop_log.txt`` (Use the four-digit year, two-digit month, and two digit day, e.g. ``2016-05-19_dc_workshop_log.txt``)
 
 ---
 
-D. You may have noticed that your history may contain the ``history`` command itself. To remove this redundancy from our log, lets use the ``nano`` text editor to fix the file:
+**D.** You may have noticed that your history may contain the ``history`` command itself. To remove this redundancy from our log, lets use the ``nano`` text editor to fix the file:
 
 ```bash
 $ nano dc_workshop_log
@@ -215,7 +215,7 @@ From the nano screen, you should be able to use your cursor to navigate, type, a
 
 ---
 
-E. Add a dateline and comment to the line where you have created the directory e.g.
+**E.** Add a dateline and comment to the line where you have created the directory e.g.
 
 ```bash
 # 2016_05_19
@@ -224,15 +224,15 @@ E. Add a dateline and comment to the line where you have created the directory e
 
 ---
 
-F. Next, remove any lines of the history that are not relevant. Just navigate to those lines and use your delete key.
+**F.** Next, remove any lines of the history that are not relevant. Just navigate to those lines and use your delete key.
 
 ---
 
-G. Close nano by hitting `Control` and the `X` key at the same time; notice in nano this is abbreviated `^X`; nano will ask if you want to save; hit `Y` for yes. When prompted for the 'File Name to Write' we can hit 'Enter' to keep the same name and save.
+**G.** Close nano by hitting `Control` and the `X` key at the same time; notice in nano this is abbreviated `^X`; nano will ask if you want to save; hit `Y` for yes. When prompted for the 'File Name to Write' we can hit 'Enter' to keep the same name and save.
 
 ---
 
-H. Now that you have created the file, move the file to `dc_workshop/docs` using the ``mv`` command.
+**H.** Now that you have created the file, move the file to `dc_workshop/docs` using the ``mv`` command.
 
 ---
 
